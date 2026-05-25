@@ -33,13 +33,13 @@ $employees = employee::all();
     ]);
 
     employee::create($request->all());
-    return view ('employee.create');
+     return redirect (route('employee.index'))->with('status','Employee Updated Successfully!');
     }
 
     public function edit(int $id)
     {
         $employees = employee::findOrFail($id);
-        return view ('employee.edit');
+        return view ('employee.edit', compact('employees'));
     }
 
     public function update(Request $request, int $id) {
@@ -55,7 +55,7 @@ $employees = employee::all();
             ]);
 
             employee::findOrFail($id)->update($request->all());
-            return redirect ()->back()->with('status','Employee Updated Successfully!');
+            return redirect (route('employee.index'))->with('status','Employee Updated Successfully!');
             }
     }
 
